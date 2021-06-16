@@ -6,3 +6,4 @@ This is a book library project from the The Odin Project JavaScript course.
 - CSS
 - Flexbox
 - JavaScript
+- Local storage
