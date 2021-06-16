@@ -19,6 +19,7 @@ body {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  z-index: 5;
 }
 
 form {
@@ -67,11 +68,20 @@ form.show-form {
   cursor: pointer;
 }
 
+.delete-btn {
+  background-color: rgb(211, 72, 72);
+  color: #fff;
+  padding: 0.75em 0.5em;
+  text-align: center;
+  cursor: pointer;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   padding: 1em;
   column-gap: 2em;
+  z-index: 5;
 }
 
 .card {

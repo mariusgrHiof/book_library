@@ -28,39 +28,40 @@ function clearForm() {
 }
 
 function Book(title, author, pages, read) {
+  let id;
   this.title = this.title;
   this.author = this.author;
   this.pages = this.pages;
   this.read = this.read;
+  id = uuidv4();
 
   return {
     title,
     author,
     pages,
     read,
+    id,
   };
 }
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
+
   localStorage.setItem('books', JSON.stringify(myLibrary));
+}
+
+function deleteBook(e) {
+  const element = e.target.closest('.card');
+  const id = element.dataset.id;
+  let filtered = myLibrary.filter((book) => book.id !== id);
+  myLibrary = filtered;
+  localStorage.setItem('books', JSON.stringify(myLibrary));
+  cardsContainer.removeChild(element);
 }
 
 function getAllBooks(books) {
   books.forEach((book) => {
-    const { title, author, pages, read, id } = book;
-
-    let html = `
-    <div class="card" data-id="${id}">
-      <h2 class="card__title">${title}</h2>
-      <p class="card__author">By ${author}</p>
-      <p class="card__pages">Pages: ${pages}</p>
-      <p class="card__read">Read: ${read}</p>
-    </div>
-    
-    
-    `;
-    cardsContainer.insertAdjacentHTML('beforeend', html);
+    renderBook(book);
   });
 }
 
@@ -82,15 +83,17 @@ function renderBook(book) {
   const { title, author, pages, read, id } = book;
 
   let html = `
-    <div class="card" data-id="${id}">
+    <div class="card" data-id=${id}>
       <h2 class="card__title">${title}</h2>
-      <p class="card__author">By ${author}</p>
+      <p class="card__author">By: ${author}</p>
       <p class="card__pages">Pages: ${pages}</p>
       <p class="card__read">Read: ${read}</p>
+      <div class="delete-btn">Delete book</div>
     </div>
     
     
     `;
+
   cardsContainer.insertAdjacentHTML('beforeend', html);
 }
 
@@ -104,6 +107,7 @@ form.addEventListener('submit', (e) => {
   if (!isValidInputs([title, author, pages, read])) return;
 
   const newBook = new Book(title, author, pages, read);
+
   addBookToLibrary(newBook);
   closeForm();
   renderBook(newBook);
@@ -113,3 +117,4 @@ form.addEventListener('submit', (e) => {
 addBtn.addEventListener('click', showForm);
 closeFormBtn.addEventListener('click', closeForm);
 overlay.addEventListener('click', closeForm);
+cardsContainer.addEventListener('click', deleteBook);
