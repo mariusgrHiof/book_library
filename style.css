@@ -1,0 +1,108 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: rgb(16, 141, 141);
+  position: relative;
+}
+
+.container {
+  max-width: 950px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+form {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  margin: 1em 0;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 3em;
+  visibility: hidden;
+  z-index: 10;
+  top: 10em;
+}
+
+form.show-form {
+  visibility: visible;
+}
+
+.close-form {
+  position: absolute;
+  top: 9px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.form-control {
+  margin: 1.5em 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-control input {
+  padding: 0.5em;
+}
+.form-control label {
+  margin-right: 0.5em;
+}
+
+#form-add-book {
+  background-color: rgb(85, 252, 160);
+  border: none;
+  padding: 0.75em 0.5em;
+  cursor: pointer;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 1em;
+  column-gap: 2em;
+}
+
+.card {
+  padding: 0 2em;
+  margin: 0.5em 0;
+  background-color: rgb(36, 186, 197);
+  border-radius: 5px;
+  color: #fff;
+}
+
+.overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+}
+.overlay.active {
+  z-index: 5;
+  opacity: 1;
+}
+
+.addBtn {
+  position: relative;
+  display: inline-block;
+  background-color: #28a745;
+  color: #fff;
+  padding: 0.85em 0.7em;
+  cursor: pointer;
+  z-index: 5;
+}
